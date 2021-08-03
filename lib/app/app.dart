@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:nested_flows/counter/counter.dart';
+import 'package:nested_flows/home/home.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const Home(),
     );
   }
 }
