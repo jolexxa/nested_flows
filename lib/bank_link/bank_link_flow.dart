@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:nested_flows/bank_link/bank_link_flow_state.dart';
-import 'package:nested_flows/bank_link/bank_selection/bank_selection_page.dart';
+import 'package:nested_flows/bank_selection/bank_selection_page.dart';
 import 'package:nested_flows/loading/loading.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -31,7 +31,7 @@ class BankLinkFlow extends StatelessWidget {
       LoadingScreen.page<List<Bank>>(
         load: () async {
           return Future.delayed(
-            const Duration(seconds: 1),
+            const Duration(seconds: 2),
             () async => const [Bank(name: 'My First Bank')],
           );
         },
