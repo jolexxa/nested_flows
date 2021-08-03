@@ -1,4 +1,6 @@
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:nested_flows/bank_link/bank_link.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -43,6 +45,14 @@ class BankSelectionPageView extends StatelessWidget {
               leading: const Icon(Icons.food_bank, size: 36),
               title: Text(banks[index].name),
               trailing: const Icon(Icons.chevron_right, size: 36),
+              onTap: () {
+                context.flow<BankLinkFlowState>().update(
+                      (flowState) => BankLinkFlowState(
+                        banks: flowState.banks,
+                        selectedBank: banks[index],
+                      ),
+                    );
+              },
             );
           },
           itemCount: banks.length,
