@@ -37,6 +37,7 @@ class FlowBuilder<T> extends StatefulWidget {
     this.state,
     this.onComplete,
     this.controller,
+    this.transitionDelegate,
     this.observers = const <NavigatorObserver>[],
   })  : assert(
           state != null || controller != null,
@@ -64,6 +65,9 @@ class FlowBuilder<T> extends StatefulWidget {
 
   /// A list of [NavigatorObserver] for this [FlowBuilder].
   final List<NavigatorObserver> observers;
+
+  /// A custom transition delegate :P
+  final TransitionDelegate<dynamic>? transitionDelegate;
 
   @override
   _FlowBuilderState<T> createState() => _FlowBuilderState<T>();
@@ -172,6 +176,8 @@ class _FlowBuilderState<T> extends State<FlowBuilder<T>> {
           key: _navigatorKey,
           pages: _pages,
           observers: widget.observers,
+          transitionDelegate:
+              widget.transitionDelegate ?? DefaultTransitionDelegate(),
           onPopPage: (route, dynamic result) {
             if (_history.length > 1) {
               _history.removeLast();
