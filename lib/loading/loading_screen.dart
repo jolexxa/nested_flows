@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested_flows/loading/bloc/loading_bloc.dart';
 
+typedef SuccessCallback<T> = void Function(BuildContext, T);
+typedef ErrorCallback = void Function(BuildContext, Object?);
+
 class LoadingScreen<T> extends StatelessWidget {
   const LoadingScreen({
     Key? key,
@@ -11,13 +14,13 @@ class LoadingScreen<T> extends StatelessWidget {
   }) : super(key: key);
 
   final ValueGetter<Future<T>> load;
-  final ValueSetter<T> onSuccess;
-  final ValueSetter<Exception> onError;
+  final SuccessCallback<T> onSuccess;
+  final ErrorCallback onError;
 
   static MaterialPage<void> page<T>({
     required ValueGetter<Future<T>> load,
-    required ValueSetter<T> onSuccess,
-    required ValueSetter<Exception> onError,
+    required SuccessCallback<T> onSuccess,
+    required ErrorCallback onError,
   }) {
     return MaterialPage<void>(
       child: LoadingScreen<T>(
@@ -35,9 +38,9 @@ class LoadingScreen<T> extends StatelessWidget {
       child: BlocListener<LoadingBloc<T>, LoadingState<T>>(
         listener: (context, state) {
           if (state is LoadingError<T>) {
-            onError(state.error as Exception);
+            onError(context, state.error as Exception);
           } else if (state is LoadingState<T>) {
-            onSuccess(state.data as T);
+            onSuccess(context, state.data as T);
           }
         },
         child: Scaffold(
