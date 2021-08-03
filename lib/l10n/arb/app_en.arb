@@ -4,6 +4,10 @@
     "@homeAppBarTitle": {
         "description": "Text shown in the AppBar of the Home Page"
     },
+    "homeTitle": "Select a flow",
+    "@homeTitle": {
+        "description": "Text shown in the Home Page"
+    },
     "bankSelectionAppBarTitle": "Choose a Bank",
     "@bankSelectionAppBarTitle": {
         "description": "Text shown in the AppBar of the Bank Selection Page"
