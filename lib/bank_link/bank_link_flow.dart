@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:nested_flows/bank_link/bank_link_flow_state.dart';
-import 'package:nested_flows/bank_selection/bank_selection_page.dart';
+import 'package:nested_flows/bank_selection/bank_selection.dart';
 import 'package:nested_flows/loading/loading.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -37,12 +37,10 @@ class BankLinkFlow extends StatelessWidget {
         onSuccess: (context, data) {
           context
               .flow<BankLinkFlowState>()
-              .update((_) => BankLinkFlowState(banks: data));
+              .update((flowState) => flowState.copyWith(banks: data));
         },
         onError: (context, error) {
-          context
-              .flow<BankLinkFlowState>()
-              .complete((_) => const BankLinkFlowState());
+          context.flow<BankLinkFlowState>().complete();
         },
       ),
       if (state.banks != null)

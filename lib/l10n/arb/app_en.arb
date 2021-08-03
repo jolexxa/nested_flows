@@ -11,5 +11,9 @@
     "bankSelectionAppBarTitle": "Choose a Bank",
     "@bankSelectionAppBarTitle": {
         "description": "Text shown in the AppBar of the Bank Selection Page"
+    },
+    "accountSelectionAppBarTitle": "Choose an Account",
+    "@accountSelectionAppBarTitle": {
+        "description": "Text shown in the AppBar of the Account Selection Page"
     }
 }
