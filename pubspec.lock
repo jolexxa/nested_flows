@@ -130,9 +130,9 @@ packages:
   flow_builder:
     dependency: "direct main"
     description:
-      name: flow_builder
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: flow_builder
+      relative: true
+    source: path
     version: "0.0.3"
   flutter:
     dependency: "direct main"

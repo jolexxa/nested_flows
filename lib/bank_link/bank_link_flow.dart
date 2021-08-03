@@ -24,29 +24,27 @@ class BankLinkFlow extends StatelessWidget {
 
   static List<Page> onGeneratePages(BankLinkFlowState state, List<Page> pages) {
     return [
-      LoadingScreen.page<List<Bank>>(
-        load: () async {
-          return Future.delayed(
-            const Duration(seconds: 3),
-            () async => const [Bank(name: 'My First Bank')],
-          );
-        },
-        onSuccess: (context, data) {
-          context
-              .flow<BankLinkFlowState>()
-              .update((_) => BankLinkFlowState(banks: data));
-        },
-        onError: (context, error) {
-          context
-              .flow<BankLinkFlowState>()
-              .complete((_) => const BankLinkFlowState());
-        },
+      BankSelectionPage.page(
+        banks: state.banks ?? [],
       ),
-      if (state.banks != null)
-        BankSelectionPage.page(
-          banks: const [
-            Bank(name: 'my first bank'),
-          ],
+      if (state.banks == null)
+        LoadingScreen.page<List<Bank>>(
+          load: () async {
+            return Future.delayed(
+              const Duration(seconds: 3),
+              () async => const [Bank(name: 'My First Bank')],
+            );
+          },
+          onSuccess: (context, data) {
+            context
+                .flow<BankLinkFlowState>()
+                .update((_) => BankLinkFlowState(banks: data));
+          },
+          onError: (context, error) {
+            context
+                .flow<BankLinkFlowState>()
+                .complete((_) => const BankLinkFlowState());
+          },
         ),
     ];
   }
