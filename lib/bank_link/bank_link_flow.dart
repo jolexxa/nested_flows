@@ -1,7 +1,8 @@
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:nested_flows/bank_link/bank_link_flow_state.dart';
-import 'package:nested_flows/loading/loading.dart';
+import 'package:nested_flows/bank_link/bank_selection/bank_selection_page.dart';
+import 'package:nested_flows/models/models.dart';
 
 class BankLinkFlow extends StatelessWidget {
   const BankLinkFlow({Key? key}) : super(key: key);
@@ -22,13 +23,11 @@ class BankLinkFlow extends StatelessWidget {
 
   static List<Page> onGeneratePages(BankLinkFlowState state, List<Page> pages) {
     return [
-      LoadingScreen.page<String>(
-        load: () async {
-          return 'Data';
-        },
-        onSuccess: (d) {},
-        onError: (e) {},
-      )
+      BankSelectionPage.page(
+        banks: const [
+          Bank(name: 'my first bank'),
+        ],
+      ),
     ];
   }
 }
