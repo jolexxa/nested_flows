@@ -17,36 +17,31 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CounterCubit(),
-      child: const CounterView(),
+      child: CounterView(),
     );
   }
 }
 
 class CounterView extends StatelessWidget {
-  const CounterView({Key? key}) : super(key: key);
+  CounterView({Key? key}) : super(key: key);
+
+  final items = ['Bank Link'];
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.counterAppBarTitle)),
-      body: const Center(child: CounterText()),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            key: const Key('counterView_increment_floatingActionButton'),
-            onPressed: () => context.read<CounterCubit>().increment(),
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-            key: const Key('counterView_decrement_floatingActionButton'),
-            onPressed: () => context.read<CounterCubit>().decrement(),
-            child: const Icon(Icons.remove),
-          ),
-        ],
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: const Icon(Icons.food_bank, size: 36),
+            title: Text(items[index]),
+            trailing: const Icon(Icons.chevron_right, size: 36),
+            onTap: () => null,
+          );
+        },
+        itemCount: items.length,
       ),
     );
   }

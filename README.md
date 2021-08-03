@@ -1,5 +1,15 @@
 # Nested Flows
 
+
+- bank link flow
+    - load banks
+    - show banks you could add
+        - pick a bank
+            - pick an account
+        - loading
+    - show success screen
+
+
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
