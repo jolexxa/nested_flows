@@ -26,7 +26,10 @@ class BankLinkFlow extends StatelessWidget {
     return [
       LoadingScreen.page<List<Bank>>(
         load: () async {
-          return [const Bank(name: 'My First Bank')];
+          return Future.delayed(
+            const Duration(seconds: 3),
+            () async => const [Bank(name: 'My First Bank')],
+          );
         },
         onSuccess: (context, data) {
           context
