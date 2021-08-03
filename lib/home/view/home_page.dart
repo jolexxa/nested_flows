@@ -18,13 +18,13 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CounterCubit(),
-      child: CounterView(),
+      child: HomeView(),
     );
   }
 }
 
-class CounterView extends StatelessWidget {
-  CounterView({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  HomeView({Key? key}) : super(key: key);
 
   final items = ['Bank Link'];
 
@@ -45,16 +45,5 @@ class CounterView extends StatelessWidget {
         itemCount: items.length,
       ),
     );
-  }
-}
-
-class CounterText extends StatelessWidget {
-  const CounterText({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.headline1);
   }
 }
