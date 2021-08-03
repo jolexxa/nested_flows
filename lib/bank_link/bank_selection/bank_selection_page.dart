@@ -29,7 +29,7 @@ class BankSelectionPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.homeAppBarTitle)),
+      appBar: AppBar(title: Text(l10n.bankSelectionAppBarTitle)),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return ListTile(

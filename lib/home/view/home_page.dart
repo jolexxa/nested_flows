@@ -27,7 +27,9 @@ class HomeView extends StatelessWidget {
             leading: const Icon(Icons.food_bank, size: 36),
             title: Text(items[index]),
             trailing: const Icon(Icons.chevron_right, size: 36),
-            onTap: () => Navigator.of(context).push(BankLinkFlow.route()),
+            onTap: () {
+              Navigator.of(context).push(BankLinkFlow.route());
+            },
           );
         },
         itemCount: items.length,
