@@ -88,7 +88,7 @@ class BankLinkFlow extends StatelessWidget {
   }
 }
 
-class MyTransitionDelegate<T> extends DefaultTransitionDelegate<T> {
+class MyTransitionDelegate<T> extends TransitionDelegate<T> {
   const MyTransitionDelegate() : super();
 
   @override
