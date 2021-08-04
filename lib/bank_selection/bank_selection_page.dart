@@ -31,10 +31,6 @@ class BankSelectionPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    // return WillPopScope(
-    //   // Don't go back from this point in the flow.
-    //   onWillPop: () async => false,
-    //   child:
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.bankSelectionAppBarTitle),
@@ -60,6 +56,5 @@ class BankSelectionPageView extends StatelessWidget {
         itemCount: banks.length,
       ),
     );
-    // );
   }
 }

@@ -30,22 +30,19 @@ class AccountSelectionPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return WillPopScope(
-      onWillPop: () async => true,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(l10n.accountSelectionAppBarTitle),
-        ),
-        body: ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: const Icon(Icons.account_balance, size: 36),
-              title: Text(accounts[index].name),
-              trailing: const Icon(Icons.chevron_right, size: 36),
-            );
-          },
-          itemCount: accounts.length,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.accountSelectionAppBarTitle),
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: const Icon(Icons.account_balance, size: 36),
+            title: Text(accounts[index].name),
+            trailing: const Icon(Icons.chevron_right, size: 36),
+          );
+        },
+        itemCount: accounts.length,
       ),
     );
   }
