@@ -23,6 +23,7 @@ class LoadingScreen<T> extends StatelessWidget {
     required ErrorCallback onError,
   }) {
     return MaterialPage<void>(
+      key: UniqueKey(),
       child: LoadingScreen<T>(
         load: load,
         onSuccess: onSuccess,

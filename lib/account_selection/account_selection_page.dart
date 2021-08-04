@@ -12,6 +12,7 @@ class AccountSelectionPage extends StatelessWidget {
 
   static MaterialPage<void> page({required List<Account> accounts}) {
     return MaterialPage(
+      key: UniqueKey(),
       child: AccountSelectionPage(accounts: accounts),
     );
   }
@@ -40,7 +41,7 @@ class AccountSelectionPageView extends StatelessWidget {
                 // Clear out selectedAccount and selectedBank.
               ),
             );
-        return true;
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(

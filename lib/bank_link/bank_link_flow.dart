@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:nested_flows/account_selection/account_selection.dart';
 import 'package:nested_flows/account_selection/account_selection_page.dart';
 import 'package:nested_flows/bank_link/bank_link_flow_state.dart';
 import 'package:nested_flows/bank_selection/bank_selection.dart';
@@ -23,35 +22,36 @@ class BankLinkFlow extends StatelessWidget {
     return const FlowBuilder<BankLinkFlowState>(
       state: BankLinkFlowState(),
       onGeneratePages: onGeneratePages,
-      transitionDelegate: MyTransitionDelegate<dynamic>(),
+      // transitionDelegate: MyTransitionDelegate<dynamic>(),
     );
   }
 
   static List<Page> onGeneratePages(BankLinkFlowState state, List<Page> pages) {
-    log('state: $state');
+    log('pages changed: $state');
     return [
-      LoadingScreen.page<List<Bank>>(
-        load: () async {
-          return Future.delayed(
-            const Duration(seconds: 2),
-            () async => const [
-              Bank(name: 'My First Bank'),
-              Bank(name: 'Big Conglomerate of Banks'),
-              Bank(name: 'Bankiest Bank'),
-              Bank(name: 'Capitalist Corp.'),
-            ],
-          );
-        },
-        onSuccess: (context, data) {
-          context
-              .flow<BankLinkFlowState>()
-              .update((flowState) => BankLinkFlowState(banks: data));
-        },
-        onError: (context, error) {
-          context.flow<BankLinkFlowState>().complete();
-        },
-      ),
-      if (state.banks != null)
+      if (state.banks == null)
+        LoadingScreen.page<List<Bank>>(
+          load: () async {
+            return Future.delayed(
+              const Duration(seconds: 2),
+              () async => const [
+                Bank(name: 'My First Bank'),
+                Bank(name: 'Big Conglomerate of Banks'),
+                Bank(name: 'Bankiest Bank'),
+                Bank(name: 'Capitalist Corp.'),
+              ],
+            );
+          },
+          onSuccess: (context, data) {
+            context
+                .flow<BankLinkFlowState>()
+                .update((flowState) => BankLinkFlowState(banks: data));
+          },
+          onError: (context, error) {
+            context.flow<BankLinkFlowState>().complete();
+          },
+        )
+      else if (state.banks != null)
         BankSelectionPage.page(
           banks: state.banks ?? [],
         ),
@@ -81,9 +81,7 @@ class BankLinkFlow extends StatelessWidget {
           },
         )
       else if (state.selectedBank != null && state.accounts != null)
-        AccountSelectionPage.page(
-          accounts: state.accounts ?? [],
-        ),
+        AccountSelectionPage.page(accounts: state.accounts ?? [])
     ];
   }
 }
