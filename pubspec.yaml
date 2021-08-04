@@ -9,8 +9,7 @@ environment:
 dependencies:
   bloc: ^7.0.0
   equatable: ^2.0.3
-  flow_builder:
-    path: flow_builder
+  flow_builder: ^0.0.4
   flutter:
     sdk: flutter
   flutter_bloc: ^7.1.0
@@ -23,7 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^0.1.0
-  very_good_analysis: ^2.1.0
+  very_good_analysis: ^2.3.0
 
 flutter:
   uses-material-design: true
