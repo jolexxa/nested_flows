@@ -10,7 +10,7 @@ class AccountSelectionPage extends StatelessWidget {
   final List<Account> accounts;
 
   static Page<void> page({required List<Account> accounts}) {
-    return NoAnimationPage<void>(
+    return PageWithoutEnter<void>(
       key: UniqueKey(),
       child: AccountSelectionPage(accounts: accounts),
     );

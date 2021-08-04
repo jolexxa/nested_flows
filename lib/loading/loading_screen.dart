@@ -23,7 +23,7 @@ class LoadingScreen<T> extends StatelessWidget {
     required SuccessCallback<T> onSuccess,
     required ErrorCallback onError,
   }) {
-    return NoAnimationPage<void>(
+    return PageWithoutAnimation<void>(
       key: UniqueKey(),
       child: LoadingScreen<T>(
         load: load,

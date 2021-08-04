@@ -11,7 +11,7 @@ class BankSelectionPage extends StatelessWidget {
   final List<Bank> banks;
 
   static Page<void> page({required List<Bank> banks}) {
-    return NoAnimationPage<void>(
+    return PageWithoutAnimation<void>(
       key: UniqueKey(),
       child: BankSelectionPage(banks: banks),
     );

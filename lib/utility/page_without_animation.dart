@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NoAnimationPage<T> extends Page<T> {
-  const NoAnimationPage({
+class PageWithoutAnimation<T> extends Page<T> {
+  const PageWithoutAnimation({
     LocalKey? key,
     required this.child,
   }) : super(key: key);
