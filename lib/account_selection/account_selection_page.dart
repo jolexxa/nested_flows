@@ -1,6 +1,4 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:nested_flows/bank_link/bank_link.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -33,16 +31,7 @@ class AccountSelectionPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return WillPopScope(
-      onWillPop: () async {
-        context.flow<BankLinkFlowState>().update(
-              (flowState) => BankLinkFlowState(
-                banks: flowState.banks,
-                accounts: flowState.accounts,
-                // Clear out selectedAccount and selectedBank.
-              ),
-            );
-        return false;
-      },
+      onWillPop: () async => true,
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.accountSelectionAppBarTitle),
