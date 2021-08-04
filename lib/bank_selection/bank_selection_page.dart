@@ -34,8 +34,13 @@ class BankSelectionPageView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.bankSelectionAppBarTitle),
-        // Hide the useless back button:
-        automaticallyImplyLeading: false,
+        // First page of a flow must end the flow to enable going back to the
+        // previous flow/navigator.
+        leading: BackButton(
+          onPressed: () => context
+              .flow<BankLinkFlowState>()
+              .complete((flowState) => flowState),
+        ),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
