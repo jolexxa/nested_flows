@@ -35,17 +35,17 @@ class BankSelectionPageView extends StatelessWidget {
 
     switch (state.status) {
       case BankSelectionStatus.loading:
-        return const _LoadingScreen();
+        return const _BankLoadingScreen();
       case BankSelectionStatus.success:
-        return _BanksList(banks: state.banks);
+        return _BankList(banks: state.banks);
       case BankSelectionStatus.failure:
         return const _BankSelectionError();
     }
   }
 }
 
-class _BanksList extends StatelessWidget {
-  const _BanksList({Key? key, required this.banks}) : super(key: key);
+class _BankList extends StatelessWidget {
+  const _BankList({Key? key, required this.banks}) : super(key: key);
 
   final List<Bank> banks;
 
@@ -55,8 +55,6 @@ class _BanksList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.bankSelectionAppBarTitle),
-        // First page of a flow must end the flow to enable going back to the
-        // previous flow/navigator.
         leading: BackButton(
           onPressed: () => context.flow<BankLinkFlowState>().complete(),
         ),
@@ -80,8 +78,8 @@ class _BanksList extends StatelessWidget {
   }
 }
 
-class _LoadingScreen extends StatelessWidget {
-  const _LoadingScreen({Key? key}) : super(key: key);
+class _BankLoadingScreen extends StatelessWidget {
+  const _BankLoadingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -33,17 +33,18 @@ class AccountSelectionPageView extends StatelessWidget {
 
     switch (state.status) {
       case AccountSelectionStatus.loading:
-        return const _LoadingScreen();
+        return const _AccountLoadingScreen();
       case AccountSelectionStatus.success:
-        return _AccountsList(accounts: state.accounts);
+        return _AccountList(accounts: state.accounts);
       case AccountSelectionStatus.failure:
         return const _AccountSelectionError();
     }
   }
 }
 
-class _AccountsList extends StatelessWidget {
-  const _AccountsList({Key? key, required this.accounts}) : super(key: key);
+class _AccountList extends StatelessWidget {
+  const _AccountList({Key? key, required this.accounts}) : super(key: key);
+
   final List<Account> accounts;
 
   @override
@@ -65,8 +66,8 @@ class _AccountsList extends StatelessWidget {
   }
 }
 
-class _LoadingScreen extends StatelessWidget {
-  const _LoadingScreen({Key? key}) : super(key: key);
+class _AccountLoadingScreen extends StatelessWidget {
+  const _AccountLoadingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
