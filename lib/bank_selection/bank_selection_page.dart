@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:nested_flows/bank_link/bank_link.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
-import 'package:nested_flows/utility/utility.dart';
 
 class BankSelectionPage extends StatelessWidget {
   const BankSelectionPage({Key? key, required this.banks}) : super(key: key);
@@ -11,7 +10,7 @@ class BankSelectionPage extends StatelessWidget {
   final List<Bank> banks;
 
   static Page<void> page({required List<Bank> banks}) {
-    return PageWithoutAnimation<void>(
+    return MaterialPage<void>(
       key: UniqueKey(),
       child: BankSelectionPage(banks: banks),
     );

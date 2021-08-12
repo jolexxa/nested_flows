@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
-import 'package:nested_flows/utility/utility.dart';
 
 class AccountSelectionPage extends StatelessWidget {
   const AccountSelectionPage({Key? key, required this.accounts})
@@ -10,7 +9,7 @@ class AccountSelectionPage extends StatelessWidget {
   final List<Account> accounts;
 
   static Page<void> page({required List<Account> accounts}) {
-    return PageWithoutEnter<void>(
+    return MaterialPage<void>(
       key: UniqueKey(),
       child: AccountSelectionPage(accounts: accounts),
     );

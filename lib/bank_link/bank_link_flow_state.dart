@@ -11,8 +11,8 @@ class BankLinkFlowState extends Equatable {
 
   final List<Bank>? banks;
   final List<Account>? accounts;
-  final Bank? selectedBank;
   final Account? selectedAccount;
+  final Bank? selectedBank;
 
   @override
   List<Object?> get props => [

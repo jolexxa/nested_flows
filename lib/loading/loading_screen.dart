@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested_flows/loading/bloc/loading_bloc.dart';
-import 'package:nested_flows/utility/utility.dart';
 
 typedef SuccessCallback<T> = void Function(BuildContext, T);
 typedef ErrorCallback = void Function(BuildContext, Object?);
@@ -23,7 +22,7 @@ class LoadingScreen<T> extends StatelessWidget {
     required SuccessCallback<T> onSuccess,
     required ErrorCallback onError,
   }) {
-    return PageWithoutAnimation<void>(
+    return MaterialPage<void>(
       key: UniqueKey(),
       child: LoadingScreen<T>(
         load: load,
