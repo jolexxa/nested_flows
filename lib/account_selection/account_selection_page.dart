@@ -1,4 +1,6 @@
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:nested_flows/bank_link/bank_link.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -38,17 +40,23 @@ class AccountSelectionPageView extends StatelessWidget {
         // flow state without updating the pages since it's about to occur
         // anyways?
         //
-        // import 'package:flow_builder/flow_builder.dart';
-        // import 'package:nested_flows/bank_link/bank_link.dart';
+        // flow.update() animates incorrectly because it thinks going back to
+        // the  previous screen is actually a push since the pages have
+        // different keys?
         //
-        // context.flow<BankLinkFlowState>().update(
-        //       (flowState) => BankLinkFlowState(
-        //         banks: flowState.banks,
-        //         accounts: flowState.accounts,
-        //         // Clear out other properties
-        //       ),
-        //     );
-        return true;
+        // flow.complete() DOES animate correctly because you are popping the
+        // entire navigator off.
+        //
+        // The only way to swap out the back behavior would be to return
+        // entirely different stacks based on loading state.
+        context.flow<BankLinkFlowState>().update(
+              (flowState) => BankLinkFlowState(
+                banks: flowState.banks,
+                accounts: flowState.accounts,
+                // Clear out other properties
+              ),
+            );
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
