@@ -27,9 +27,12 @@ class BankLinkFlow extends StatelessWidget {
   }
 
   static List<Page> onGeneratePages(BankLinkFlowState state, List<Page> pages) {
+    final stack = <Page>[];
     log('pages changed: $state');
-    return [
-      if (state.banks == null)
+
+    // Phase 1 of the flow: load banks, allow user to select bank
+    if (state.banks == null) {
+      stack.add(
         LoadingScreen.page<List<Bank>>(
           load: () async {
             return Future.delayed(
@@ -50,38 +53,50 @@ class BankLinkFlow extends StatelessWidget {
           onError: (context, error) {
             context.flow<BankLinkFlowState>().complete();
           },
-        )
-      else if (state.banks != null)
+        ),
+      );
+    } else {
+      stack.add(
         BankSelectionPage.page(
           banks: state.banks ?? [],
         ),
-      if (state.selectedBank != null && state.accounts == null)
-        LoadingScreen.page<List<Account>>(
-          load: () async {
-            return Future.delayed(
-              const Duration(seconds: 2),
-              () async => const [
-                Account(name: 'Account #1234567893'),
-                Account(name: 'Account #0234513811'),
-                Account(name: 'Account #5183138501'),
-              ],
-            );
-          },
-          onSuccess: (context, data) {
-            context.flow<BankLinkFlowState>().update(
-                  (flowState) => BankLinkFlowState(
-                    banks: flowState.banks,
-                    accounts: data,
-                    selectedBank: flowState.selectedBank,
-                  ),
-                );
-          },
-          onError: (context, error) {
-            context.flow<BankLinkFlowState>().complete();
-          },
-        )
-      else if (state.selectedBank != null && state.accounts != null)
-        AccountSelectionPage.page(accounts: state.accounts ?? [])
-    ];
+      );
+    }
+
+    // Phase 2 of the flow: load accounts for a given bank, allow user
+    // to pick an account.
+    if (state.selectedBank != null) {
+      if (state.accounts == null) {
+        stack.add(
+          LoadingScreen.page<List<Account>>(
+            load: () async {
+              return Future.delayed(
+                const Duration(seconds: 2),
+                () async => const [
+                  Account(name: 'Account #1234567893'),
+                  Account(name: 'Account #0234513811'),
+                  Account(name: 'Account #5183138501'),
+                ],
+              );
+            },
+            onSuccess: (context, data) {
+              context.flow<BankLinkFlowState>().update(
+                    (flowState) => BankLinkFlowState(
+                      banks: flowState.banks,
+                      accounts: data,
+                      selectedBank: flowState.selectedBank,
+                    ),
+                  );
+            },
+            onError: (context, error) {
+              context.flow<BankLinkFlowState>().complete();
+            },
+          ),
+        );
+      } else {
+        stack.add(AccountSelectionPage.page(accounts: state.accounts ?? []));
+      }
+    }
+    return stack;
   }
 }

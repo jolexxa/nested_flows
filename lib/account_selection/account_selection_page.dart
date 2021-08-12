@@ -1,6 +1,4 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:nested_flows/bank_link/bank_link.dart';
 import 'package:nested_flows/l10n/l10n.dart';
 import 'package:nested_flows/models/models.dart';
 
@@ -49,14 +47,18 @@ class AccountSelectionPageView extends StatelessWidget {
         //
         // The only way to swap out the back behavior would be to return
         // entirely different stacks based on loading state.
-        context.flow<BankLinkFlowState>().update(
-              (flowState) => BankLinkFlowState(
-                banks: flowState.banks,
-                accounts: flowState.accounts,
-                // Clear out other properties
-              ),
-            );
-        return false;
+        //
+        //
+        // import 'package:flow_builder/flow_builder.dart';
+        // import 'package:nested_flows/bank_link/bank_link.dart';
+        // context.flow<BankLinkFlowState>().update(
+        //       (flowState) => BankLinkFlowState(
+        //         banks: flowState.banks,
+        //         accounts: flowState.accounts,
+        //         // Clear out other properties
+        //       ),
+        //     );
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
